@@ -11,8 +11,12 @@ public class GSmanager : MonoBehaviour
 {
     const string URL = "https://script.google.com/macros/s/AKfycbxc5R_Y7zTad80LiUs_O-6wE889DjIquIuirMARMTgOFqGOdsJ3/exec";
     public InputField IDInput, PassInput;
-    public TextMeshProUGUI message;
+    public TextMeshProUGUI message, myID;
     string id, pass;
+   // static string[] a;
+    //int i = 0;
+
+
 
     IEnumerator Start()
     {
@@ -23,12 +27,8 @@ public class GSmanager : MonoBehaviour
 
         string data = www.downloadHandler.text;
         print(data);
-        //int a = data.IndexOf("{");
-        //int b = data.LastIndexOf("}");
-        //data.Remove(a, b );
-        //int c = data.
-        message.text = data;
 
+        //myID.text = a[i];
     }
 
     bool SetIDPass()
@@ -66,11 +66,15 @@ public class GSmanager : MonoBehaviour
         }
 
         WWWForm form = new WWWForm();
+
         form.AddField("order", "login");
         form.AddField("id", id);
         form.AddField("pass", pass);
 
+        //myID.text = a[i];
+
         StartCoroutine(Post(form));
+
     }
 
     void OnApplicationQuit()
@@ -89,8 +93,20 @@ public class GSmanager : MonoBehaviour
 
             if (www.isDone)
             {
+                string[] data = www.downloadHandler.text.Split(new char[] { '"' });
                 print(www.downloadHandler.text);
-                message.text = www.downloadHandler.text;
+                message.text = data[data.Length - 2];
+                string S1 = www.downloadHandler.text;
+                string S2 = "log in succeed";
+
+                if (S1.Contains(S2))
+                {
+                    SceneManager.LoadScene("third");
+                    //DontDestroyOnLoad(gameObject);
+                    //a[i]= id;
+                    //myID.text = a[i];
+                    //i++;
+                }
             }
             else
             {
@@ -111,4 +127,5 @@ public class GSmanager : MonoBehaviour
         SceneManager.LoadScene("signup");
 
     }
+
 }

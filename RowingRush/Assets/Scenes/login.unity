@@ -1177,6 +1177,7 @@ MonoBehaviour:
   IDInput: {fileID: 726445432}
   PassInput: {fileID: 1842159488}
   message: {fileID: 1688130291}
+  myID: {fileID: 1309431350}
 --- !u!4 &1459833155
 Transform:
   m_ObjectHideFlags: 0
