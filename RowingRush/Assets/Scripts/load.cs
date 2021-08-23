@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class load : MonoBehaviour
 {
+
    public void SceneChange()
     {
         SceneManager.LoadScene("account");
-       
+
+
     }
 }
 

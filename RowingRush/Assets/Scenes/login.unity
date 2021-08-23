@@ -1174,6 +1174,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b908fbe8e6a6604596cfab5209aeb45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GD:
+    order: 
+    result: 
+    msg: 
+    distance: 
+    time: 
+    speed: 
   IDInput: {fileID: 726445432}
   PassInput: {fileID: 1842159488}
   message: {fileID: 1688130291}

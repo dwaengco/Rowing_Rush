@@ -7,6 +7,8 @@ using TMPro;
 
 public class Distance : MonoBehaviour
 {
+    private GSmanager scriptG;
+
     public GameObject _Boat;
     public GameObject FinishMenu;
     public GameObject Ranking;
@@ -97,11 +99,6 @@ public class Distance : MonoBehaviour
         yield return null;
     }
 
-    /*IEnumerator CalSpeed()
-    {
-        curSpeedText.text = avgSpeed.ToString("F0");
-        yield return null;
-    }*/
 
     IEnumerator curScore(){
         isFinishMenu = false;
@@ -234,6 +231,10 @@ public class Distance : MonoBehaviour
         avgSpeed = (BoatDistance / 1000) / (curTime / 3600 % 3600);
         StartCoroutine("CalSpeed");
         
+        //setvalue 함수를 여기에 써야 하나 싶어서
+       // scriptG = GameObject.Find("GSmanager").GetComponent<GSmanager>();
+        //scriptG.SetValue((TargetDistance / 1000).ToString(), curTimeText.text, avgSpeed.ToString("F0"));
+       // GameObject.Find("GSmanager").GetComponent<GSmanager>().SetValue();
     }
 
     void LateUpdate(){
@@ -245,8 +246,11 @@ public class Distance : MonoBehaviour
             StopCoroutine("CalSpeed");
             FinishMenu.SetActive(true);
             StartCoroutine("curScore");
-            
-            
+
+            scriptG = GameObject.Find("GSmanager").GetComponent<GSmanager>();
+            scriptG.SetValue((TargetDistance / 1000).ToString(), curTimeText.text, avgSpeed.ToString("F0"));
+
+
         }
         
     }
