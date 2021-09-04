@@ -24,7 +24,8 @@ public class GSmanager : MonoBehaviour
     public TextMeshProUGUI message, myID;
     string id, pass;
 
-
+    string jsondata;
+    
 
 
 
@@ -68,7 +69,6 @@ public class GSmanager : MonoBehaviour
         form.AddField("order", "login");
         form.AddField("id", id);
         form.AddField("pass", pass);
-
 
         StartCoroutine(Post(form));
 

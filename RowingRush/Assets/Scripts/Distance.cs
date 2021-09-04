@@ -9,6 +9,9 @@ public class Distance : MonoBehaviour
 {
     private GSmanager scriptG;
 
+    public GameObject paddle;
+    public GameObject paddle1;
+
     public GameObject _Boat;
     public GameObject FinishMenu;
     public GameObject Ranking;
@@ -215,6 +218,48 @@ public class Distance : MonoBehaviour
         
     }
 
+    IEnumerator TimeRotation(GameObject target, float time)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(time);
+            target.transform.Rotate(0f, 1f, 0f);
+            yield return new WaitForSeconds(time);
+            target.transform.Rotate(-0f, -1f, -0f);
+            yield return new WaitForSeconds(time);
+            target.transform.Rotate(-0f, -1f, -0f);
+            yield return new WaitForSeconds(time);
+            target.transform.Rotate(0f, 1f, 0f);
+
+            if(speed<=3)
+            {
+                yield break;
+            }
+        }
+
+    }
+
+    IEnumerator TimeRotation1(GameObject target, float time)
+    {
+        while (true)
+        {           
+            yield return new WaitForSeconds(time);
+            target.transform.Rotate(-0f, -1f, -0f);
+            yield return new WaitForSeconds(time);
+            target.transform.Rotate(0f, 1f, 0f);
+            yield return new WaitForSeconds(time);
+            target.transform.Rotate(0f, 1f, 0f);
+            yield return new WaitForSeconds(time);
+            target.transform.Rotate(-0f, -1f, -0f);
+
+
+            if (speed <= 3)
+            {
+                yield break;
+            }
+        }
+
+    }
 
     public void Start(){
         TargetDistance = PlayerPrefs.GetInt("TargetDistance");
@@ -230,11 +275,17 @@ public class Distance : MonoBehaviour
         StartCoroutine("CalDistance");
         avgSpeed = (BoatDistance / 1000) / (curTime / 3600 % 3600);
         StartCoroutine("CalSpeed");
-        
-        //setvalue 함수를 여기에 써야 하나 싶어서
-       // scriptG = GameObject.Find("GSmanager").GetComponent<GSmanager>();
-        //scriptG.SetValue((TargetDistance / 1000).ToString(), curTimeText.text, avgSpeed.ToString("F0"));
-       // GameObject.Find("GSmanager").GetComponent<GSmanager>().SetValue();
+
+
+        if (speed > 3)
+        {
+            StartCoroutine(TimeRotation(paddle, 1f));
+            StartCoroutine(TimeRotation1(paddle1, 1f));
+
+        }
+
+
+
     }
 
     void LateUpdate(){
@@ -254,5 +305,7 @@ public class Distance : MonoBehaviour
         }
         
     }
+
+
 
 }
