@@ -1185,6 +1185,7 @@ MonoBehaviour:
   PassInput: {fileID: 1842159488}
   message: {fileID: 1688130291}
   myID: {fileID: 1309431350}
+  myRanking: {fileID: 0}
 --- !u!4 &1459833155
 Transform:
   m_ObjectHideFlags: 0
@@ -2246,7 +2247,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1459833154}
         m_TargetAssemblyTypeName: GSmanager, Assembly-CSharp
-        m_MethodName: Login
+        m_MethodName: Ranking
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

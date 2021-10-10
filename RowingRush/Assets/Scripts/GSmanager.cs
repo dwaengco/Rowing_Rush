@@ -21,7 +21,7 @@ public class GSmanager : MonoBehaviour
 
 
     public InputField IDInput, PassInput;
-    public TextMeshProUGUI message, myID;
+    public TextMeshProUGUI message, myID, myRanking;
     string id, pass;
 
     string jsondata;
@@ -104,6 +104,7 @@ public class GSmanager : MonoBehaviour
             if (www.isDone)
             {
                 Response(www.downloadHandler.text);
+               // print("1");
 
                 string[] data = www.downloadHandler.text.Split(new char[] { '"' });
                 message.text = data[data.Length - 2];
@@ -124,21 +125,71 @@ public class GSmanager : MonoBehaviour
         }
     }
 
+    IEnumerator Rank(WWWForm form)
+    {
+        using (UnityWebRequest www = UnityWebRequest.Post(URL, form))
+        {
+            yield return www.SendWebRequest();
+            print("rank1");
+
+            if (www.isDone)
+            {
+                print("rank2");
+
+                Response(www.downloadHandler.text);
+                print("rank3");
+
+                if (GD.result == id)
+                {
+                    print("rank4");
+
+                    myRanking.text = GD.msg;
+                }
+
+                print(GD.order + "을 실행했습니다. 메시지 : " + GD.msg);
+                //myRanking.text = www.downloadHandler.text;
+                // myRanking.text = "R U Crazy?";
+                // Debug.Log(myRanking.text);
+                //myID.text = id;
+
+            }
+            else
+            {
+                print("웹의 응답이 없습니다.");
+                message.text = "No response from the web.";
+            }
+        }
+    }
+
+    public void Ranking()
+    {
+
+        WWWForm form = new WWWForm();
+
+        form.AddField("order", "setValue");
+        StartCoroutine(Rank(form));
+ 
+    }
+
     void Response(string json)
     {
+        print("첫번째반응");
         if(string.IsNullOrEmpty(json))
         {
+            print("두번째반응");
             return;
         }
-
+        print("세번째반응");
         GD = JsonUtility.FromJson<GoogleData>(json);
+        print("네번째반응");
+        Debug.Log(GD.result);
 
         if(GD.result == "ERROR")
         {
+
             print(GD.order + "을 실행할 수 없습니다. 에러 메시지 : " + GD.msg);
             return;
         }
-
         print(GD.order + "을 실행했습니다. 메시지 : " + GD.msg);
 
 
