@@ -973,7 +973,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 'hello, '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -1569,10 +1569,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b908fbe8e6a6604596cfab5209aeb45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GD:
+    order: 
+    result: 
+    msg: 
+    distance: 
+    time: 
+    speed: 
   IDInput: {fileID: 0}
   PassInput: {fileID: 0}
   message: {fileID: 0}
   myID: {fileID: 1246213919}
+  myRanking: {fileID: 0}
 --- !u!4 &1928187199
 Transform:
   m_ObjectHideFlags: 0

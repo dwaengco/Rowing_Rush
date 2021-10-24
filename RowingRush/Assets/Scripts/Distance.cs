@@ -25,6 +25,7 @@ public class Distance : MonoBehaviour
     public TextMeshProUGUI curSpeedText;
     public TextMeshProUGUI RecordText;
     public TextMeshProUGUI MainText;
+    public TextMeshProUGUI myid;
 
     public TextMeshProUGUI BestRecord;
     public TextMeshProUGUI SecondRecord;
@@ -266,6 +267,9 @@ public class Distance : MonoBehaviour
         
         StartCoroutine("StartCount");
         oldPosition = transform.position;
+        scriptG = GameObject.Find("GSmanager").GetComponent<GSmanager>();
+        myid.text = scriptG.myID.text;
+
     }
 
 
@@ -299,8 +303,7 @@ public class Distance : MonoBehaviour
             StartCoroutine("curScore");
 
             scriptG = GameObject.Find("GSmanager").GetComponent<GSmanager>();
-            scriptG.SetValue((TargetDistance / 1000).ToString(), curTimeText.text, avgSpeed.ToString("F0"));
-
+            scriptG.SetValue((TargetDistance / 1000).ToString(), curTimeText.text.ToString(), avgSpeed.ToString("F0"));
 
         }
         

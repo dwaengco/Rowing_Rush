@@ -1,27 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Text;
 
 [System.Serializable]
 public class GoogleData
 {
-    public string order, result, msg, distance, time, speed;
+    public string order, result, msg, myranking1, myranking2, myranking3; 
+    public int distance, time, speed;
 }
 
 
 public class GSmanager : MonoBehaviour
 {
     const string URL = "https://script.google.com/macros/s/AKfycbxc5R_Y7zTad80LiUs_O-6wE889DjIquIuirMARMTgOFqGOdsJ3/exec";
+    //const string URL2 = "https://script.google.com/macros/s/AKfycbzurOOI8hf1HuSgWm3tPcUUi2KjvqsoD2XUvCwulWpxD-YPUAvBqiHpsQJmru1u-Bcx/exec";
     public GoogleData GD;
 
 
 
     public InputField IDInput, PassInput;
-    public TextMeshProUGUI message, myID, myRanking;
+    public TextMeshProUGUI message, myID, myRanking1, myRanking2, myRanking3;
     string id, pass;
 
     string jsondata;
@@ -71,6 +76,8 @@ public class GSmanager : MonoBehaviour
         form.AddField("pass", pass);
 
         StartCoroutine(Post(form));
+
+        myID.text = id;
 
     }
 
@@ -131,23 +138,31 @@ public class GSmanager : MonoBehaviour
         {
             yield return www.SendWebRequest();
             print("rank1");
+            //form.AddField("order", "Ranking");
 
             if (www.isDone)
             {
+
+
                 print("rank2");
 
-                Response(www.downloadHandler.text);
+                Response2(www.downloadHandler.text);
                 print("rank3");
 
-                if (GD.result == id)
-                {
-                    print("rank4");
+               // if (GD.result == id)
+                //{
+                  //  print("rank4");
 
-                    myRanking.text = GD.msg;
-                }
+                    //myRanking.text = GD.msg;
+                //}
 
                 print(GD.order + "을 실행했습니다. 메시지 : " + GD.msg);
-                //myRanking.text = www.downloadHandler.text;
+
+                myRanking1.text = GD.myranking1;
+                myRanking2.text = GD.myranking2;
+                myRanking3.text = GD.myranking3;
+
+
                 // myRanking.text = "R U Crazy?";
                 // Debug.Log(myRanking.text);
                 //myID.text = id;
@@ -166,22 +181,22 @@ public class GSmanager : MonoBehaviour
 
         WWWForm form = new WWWForm();
 
-        form.AddField("order", "setValue");
+        form.AddField("order", "Ranking");
         StartCoroutine(Rank(form));
  
     }
 
     void Response(string json)
     {
-        print("첫번째반응");
+
         if(string.IsNullOrEmpty(json))
         {
-            print("두번째반응");
             return;
         }
-        print("세번째반응");
+
         GD = JsonUtility.FromJson<GoogleData>(json);
-        print("네번째반응");
+
+
         Debug.Log(GD.result);
 
         if(GD.result == "ERROR")
@@ -195,7 +210,29 @@ public class GSmanager : MonoBehaviour
 
     }
 
+    void Response2(string json)
+    {
+        print("첫번째반응");
+        if (string.IsNullOrEmpty(json))
+        {
+            print("두번째반응");
+            return;
+        }
+        print("세번째반응");
+        GD = JsonUtility.FromJson<GoogleData>(json);
+        print("네번째반응");
+        Debug.Log(GD.result);
 
+        if (GD.result == "ERROR")
+        {
+
+            print(GD.order + "을 실행할 수 없습니다. 에러 메시지 : " + GD.msg);
+            return;
+        }
+        print(GD.order + "을 실행했습니다. 메시지 : " + GD.msg);
+
+
+    }
     public void SC_login()
     {
         SceneManager.LoadScene("login");
