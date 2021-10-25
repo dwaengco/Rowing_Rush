@@ -12,7 +12,7 @@ using System.Text;
 [System.Serializable]
 public class GoogleData
 {
-    public string order, result, msg, myranking1, myranking2, myranking3; 
+    public string order, result, msg, myranking1, myranking2, myranking3, curID; 
     public int distance, time, speed;
 }
 
@@ -24,7 +24,7 @@ public class GSmanager : MonoBehaviour
     public GoogleData GD;
 
 
-
+    public Canvas canvas;
     public InputField IDInput, PassInput;
     public TextMeshProUGUI message, myID, myRanking1, myRanking2, myRanking3;
     string id, pass;
@@ -77,7 +77,8 @@ public class GSmanager : MonoBehaviour
 
         StartCoroutine(Post(form));
 
-        myID.text = id;
+        myID.text = GD.curID;
+        DontDestroyOnLoad(canvas);
 
     }
 
@@ -161,6 +162,7 @@ public class GSmanager : MonoBehaviour
                 myRanking1.text = GD.myranking1;
                 myRanking2.text = GD.myranking2;
                 myRanking3.text = GD.myranking3;
+                myID.text = GD.curID;
 
 
                 // myRanking.text = "R U Crazy?";

@@ -1178,14 +1178,21 @@ MonoBehaviour:
     order: 
     result: 
     msg: 
-    distance: 
-    time: 
-    speed: 
+    myranking1: 
+    myranking2: 
+    myranking3: 
+    curID: 
+    distance: 0
+    time: 0
+    speed: 0
+  canvas: {fileID: 0}
   IDInput: {fileID: 726445432}
   PassInput: {fileID: 1842159488}
   message: {fileID: 1688130291}
   myID: {fileID: 1309431350}
-  myRanking: {fileID: 0}
+  myRanking1: {fileID: 0}
+  myRanking2: {fileID: 0}
+  myRanking3: {fileID: 0}
 --- !u!4 &1459833155
 Transform:
   m_ObjectHideFlags: 0
